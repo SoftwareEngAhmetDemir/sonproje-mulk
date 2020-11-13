@@ -12,11 +12,7 @@ import { AuthContext } from "../panel/Context/AuthContext";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-
-
-
-
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "http://softwareengahmetdemir.github.io/mysocket";
 
 export default React.memo(function CardDetails() {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(
@@ -28,195 +24,190 @@ export default React.memo(function CardDetails() {
   const id = new URLSearchParams(location.search).get("cardid");
   const [props, setProps] = useState([]);
 
-// //////////////////
+  // //////////////////
 
-function timeDiffCalc(dateFuture, dateNow) {
+  function timeDiffCalc(dateFuture, dateNow) {
+    if (dateFuture.getFullYear() < dateNow.getFullYear()) {
+      return "tarih gecti";
+    } else {
+      if (
+        dateFuture.getFullYear() === dateNow.getFullYear() &&
+        dateFuture.getMonth() < dateNow.getMonth()
+      ) {
+        return "tarih gecti";
+      } else {
+        if (
+          dateFuture.getFullYear() === dateNow.getFullYear() &&
+          dateFuture.getMonth() === dateNow.getMonth() &&
+          dateFuture.getDate() < dateNow.getDate()
+        ) {
+          return "tarih gecti";
+        } else {
+          if (
+            dateFuture.getFullYear() === dateNow.getFullYear() &&
+            dateFuture.getMonth() === dateNow.getMonth() &&
+            dateFuture.getDate() === dateNow.getDate() &&
+            dateFuture.getHours() < dateNow.getHours()
+          ) {
+            return "tarih gecti";
+          }
+        }
 
-  if(dateFuture.getFullYear()<dateNow.getFullYear())
-  {
-  return 'tarih gecti'
-  }
-  else
-  {
-      if(dateFuture.getFullYear()===dateNow.getFullYear()&&dateFuture.getMonth()<dateNow.getMonth())
-      {
-          return 'tarih gecti'
+        if (
+          dateFuture.getFullYear() === dateNow.getFullYear() &&
+          dateFuture.getMonth() === dateNow.getMonth() &&
+          dateFuture.getDate() === dateNow.getDate() &&
+          dateFuture.getHours() === dateNow.getHours() &&
+          dateFuture.getMinutes() === dateNow.getMinutes()
+        ) {
+          return "tarih gecti";
+        }
+
+        if (
+          dateFuture.getFullYear() === dateNow.getFullYear() &&
+          dateFuture.getMonth() === dateNow.getMonth() &&
+          dateFuture.getDate() === dateNow.getDate() &&
+          dateFuture.getHours() === dateNow.getHours() &&
+          dateFuture.getMinutes() === dateNow.getMinutes() &&
+          dateFuture.getSeconds() === dateNow.getSeconds()
+        ) {
+          return "tarih gecti";
+        }
       }
-  else{
-      if(dateFuture.getFullYear()===dateNow.getFullYear()&&dateFuture.getMonth()===dateNow.getMonth()&&dateFuture.getDate()<dateNow.getDate())
-      {
-          return 'tarih gecti'
-      }
-      else{
-          if(dateFuture.getFullYear()===dateNow.getFullYear()
-          &&dateFuture.getMonth()===dateNow.getMonth()&&dateFuture.getDate()===dateNow.getDate()
-          &&dateFuture.getHours()<dateNow.getHours())
-          {
-              return 'tarih gecti'
-          }
-      }
-      
-      
-          if(dateFuture.getFullYear()===dateNow.getFullYear()
-          &&dateFuture.getMonth()===dateNow.getMonth()&&dateFuture.getDate()===dateNow.getDate()
-          &&dateFuture.getHours()===dateNow.getHours()&&dateFuture.getMinutes()===dateNow.getMinutes())
-          {
-              return 'tarih gecti'
-          }
-  
-          if(dateFuture.getFullYear()===dateNow.getFullYear()
-          &&dateFuture.getMonth()===dateNow.getMonth()&&dateFuture.getDate()===dateNow.getDate()
-          &&dateFuture.getHours()===dateNow.getHours()
-          &&dateFuture.getMinutes()===dateNow.getMinutes()&&dateFuture.getSeconds()===dateNow.getSeconds())
-          {
-              return 'tarih gecti'
-          }
-      
-  
-  }
-  
-  }
-  
-  
-      let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
-  
-  
-      // calculate days
-      const days = Math.floor(diffInMilliSeconds / 86400);
-      diffInMilliSeconds -= days * 86400;
-      // console.log('calculated days', days);
-  
-      // calculate hours
-      const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
-      diffInMilliSeconds -= hours * 3600;
-      // console.log('calculated hours', hours);
-  
-      // calculate minutes
-      const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
-      diffInMilliSeconds -= minutes * 60;
-      // console.log('minutes', minutes);
-      // console.log(diffInMilliSeconds)
-      // console.log('seconds ',seconds)
-      let difference = '';
-      if (days > 0) {
-        difference += (days === 1) ? `${days} day : ` : `${days} days, `;
-      }
-  
-      difference += (hours === 0 || hours === 1) ? `${hours} hour : ` : `${hours} hours, `;
-  
-      difference += (minutes === 0 || hours === 1) ? `${minutes} minutes` : `${minutes} minutes`;
-     
-  
-      // return `${days} days : ${hours} hours: ${minutes} minutes : ${diffInMilliSeconds} seconds `
-     return  {days:days,hours:hours,minutes:minutes,seconds:Math.floor( diffInMilliSeconds)}
     }
 
+    let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
 
-// /////////////////////////
+    // calculate days
+    const days = Math.floor(diffInMilliSeconds / 86400);
+    diffInMilliSeconds -= days * 86400;
+    // console.log('calculated days', days);
 
+    // calculate hours
+    const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
+    diffInMilliSeconds -= hours * 3600;
+    // console.log('calculated hours', hours);
+
+    // calculate minutes
+    const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
+    diffInMilliSeconds -= minutes * 60;
+    // console.log('minutes', minutes);
+    // console.log(diffInMilliSeconds)
+    // console.log('seconds ',seconds)
+    let difference = "";
+    if (days > 0) {
+      difference += days === 1 ? `${days} day : ` : `${days} days, `;
+    }
+
+    difference +=
+      hours === 0 || hours === 1 ? `${hours} hour : ` : `${hours} hours, `;
+
+    difference +=
+      minutes === 0 || hours === 1
+        ? `${minutes} minutes`
+        : `${minutes} minutes`;
+
+    // return `${days} days : ${hours} hours: ${minutes} minutes : ${diffInMilliSeconds} seconds `
+    return {
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: Math.floor(diffInMilliSeconds),
+    };
+  }
+
+  // /////////////////////////
 
   async function fx() {
-   
-    await Axios.get(`/estate/public/${id}`).then(async(response) => {
+    await Axios.get(`/estate/public/${id}`).then(async (response) => {
       if (response.data.length > 0) {
-       console.log(response.data[0].end_date)
-       setInterval(() => {
-        settarih(timeDiffCalc(new Date(response.data[0].end_date), new Date())) 
-       }, 1000);
-     
-       setProps([...response.data]);
+        console.log(response.data[0].end_date);
+        setInterval(() => {
+          settarih(
+            timeDiffCalc(new Date(response.data[0].end_date), new Date())
+          );
+        }, 1000);
+
+        setProps([...response.data]);
       }
-   
-      
-  
-      
     });
     // return;
   }
-  
-const [tarih,settarih] = useState('');
 
-  
-
-
+  const [tarih, settarih] = useState("");
+  // const [katilan]
 
   const [response, setResponse] = useState("");
   const myref = React.createRef("");
 
-const get_fiyat = async()=>{
-  setResponse('bekleyiniz')
-  // setResponse('bekleyiniz')
- 
-await Axios.get(ENDPOINT+`/${id}`).then((response) => {
-    if (response.data.length > 0) {
-     
-      setResponse(response.data);
-    }
-    
-    
-  });
-  // return;
-}
+  const get_fiyat = async () => {
+    setResponse("bekleyiniz");
+    // setResponse('bekleyiniz')
 
-  const teklifveme = async() => {
-  // console.log(myref.current.value)
-if(Number(response)<Number(myref.current.value)) // update
-{
-  await Axios.get(ENDPOINT+`/update/${id}/${user.id}/${user.name}/${myref.current.value}`).then(async(response) => {
-    if (response.data.length > 0) {
-      const socket = socketIOClient(ENDPOINT, {
-        transports: ["websocket", "polling", "flashsocket"],
-      });
-      socket.on("name", (data) => {
-        setResponse(data);
-      });
-    }
-  })
-
-}
-
-console.log('response ', response);
-  if(response==='dahayok') // insert
-  {
-// console.log('evet')
-await Axios.get
-(ENDPOINT+`/insertfiyat/${id}/${user.id}/${user.name}/${myref.current.value}/${props[0].end_date}`).then(async(response) => {
-  if (response.data.length > 0) {
-    const socket = socketIOClient(ENDPOINT, {
-      transports: ["websocket", "polling", "flashsocket"],
+    await Axios.get(ENDPOINT + `/${id}`).then((response) => {
+      if (response.data.length > 0) {
+        setResponse(response.data);
+      }
     });
-    socket.on("name", (data) => {
-      setResponse(data);
-      
-    });
-  
-  }
-})
-  }
-  else{
-    console.log('hayir')
-  }
- 
+    // return;
   };
 
-  
+  const teklifveme = async () => {
+    console.log(myref.current.value);
+    if (Number(response) < Number(myref.current.value)) {
+      // update
+      await Axios.get(
+        ENDPOINT +
+          `/update/${id}/${user.id}/${user.name}/${myref.current.value}`
+      ).then(async (response) => {
+        if (response.data.length > 0) {
+          const socket = socketIOClient(ENDPOINT, {
+            transports: ["websocket", "polling", "flashsocket"],
+          });
+          socket.on("name", (data) => {
+            setResponse(data);
+          });
+        }
+      });
+    }
+
+    console.log("response ", response);
+    if (response === "dahayok") {
+      // insert
+      // console.log('evet')
+      await Axios.get(
+        ENDPOINT +
+          `/insertfiyat/${id}/${user.id}/${user.name}/${myref.current.value}/${props[0].end_date}`
+      ).then(async (response) => {
+        if (response.data.length > 0) {
+          const socket = socketIOClient(ENDPOINT, {
+            transports: ["websocket", "polling", "flashsocket"],
+          });
+          socket.on("name", (data) => {
+            setResponse(data);
+          });
+        }
+      });
+    } else {
+      console.log("hayir");
+    }
+  };
+
   useEffect(() => {
- 
     fx();
- 
-   get_fiyat();
-  
+
+    get_fiyat();
+
     const socket = socketIOClient(ENDPOINT, {
       transports: ["websocket", "polling", "flashsocket"],
     });
     socket.on("name", (data) => {
       setResponse(data);
-      
     });
 
     // console.log(props.id[0])
-  },[]);
- 
+  }, []);
+
   if (props.length > 0)
     return (
       <div>
@@ -518,17 +509,25 @@ await Axios.get
               </div>
               <div class="col-md-5 col-lg-3 px-0">
                 <div>
-               <div class="candidate">
+                  <div class="candidate">
                     <div class="wrapper">
-                    <i class="fas fa-clock"></i>
+                      <i class="fas fa-clock"></i>
                       <p>
-                      {
-        
-      
-        tarih!=='tarih gecti'?  tarih.days+ ' : '+ tarih.hours+' : '+tarih.minutes+' : '+tarih.seconds:'tarih gecti'}
-                        <br/>
-                        
-                      <div style={{marginLeft:'20px'}}> Gün:saat:dk:sn</div> 
+                        {tarih !== "tarih gecti"
+                          ? tarih.days +
+                            " : " +
+                            tarih.hours +
+                            " : " +
+                            tarih.minutes +
+                            " : " +
+                            tarih.seconds
+                          : "tarih gecti"}
+                        <br />
+
+                        <div style={{ marginLeft: "20px" }}>
+                          {" "}
+                          Gün:saat:dk:sn
+                        </div>
                       </p>
                     </div>
                   </div>
