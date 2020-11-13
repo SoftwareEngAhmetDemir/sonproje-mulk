@@ -170,7 +170,6 @@ if(Number(response)<Number(myref.current.value)) // update
       });
       socket.on("name", (data) => {
         setResponse(data);
-        
       });
     
     }
