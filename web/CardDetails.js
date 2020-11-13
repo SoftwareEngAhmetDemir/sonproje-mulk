@@ -8,10 +8,8 @@ import { Button, Input, TextField } from "@material-ui/core";
 import Axios from "axios";
 // import { AuthContext } from "../../panel/Context/AuthContext";
 import { AuthContext } from "../panel/Context/AuthContext";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
-
 const ENDPOINT = "http://localhost:8000";
 
 export default React.memo(function CardDetails() {
