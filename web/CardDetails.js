@@ -160,7 +160,6 @@ await Axios.get(ENDPOINT+`/${id}`).then((response) => {
 
   const teklifveme = async() => {
   // console.log(myref.current.value)
-
 if(Number(response)<Number(myref.current.value)) // update
 {
   await Axios.get(ENDPOINT+`/update/${id}/${user.id}/${user.name}/${myref.current.value}`).then(async(response) => {
