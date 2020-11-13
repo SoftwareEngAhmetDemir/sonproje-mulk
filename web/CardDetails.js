@@ -24,7 +24,6 @@ export default React.memo(function CardDetails() {
   const [props, setProps] = useState([]);
 
   // //////////////////
-
   function timeDiffCalc(dateFuture, dateNow) {
     if (dateFuture.getFullYear() < dateNow.getFullYear()) {
       return "tarih gecti";
