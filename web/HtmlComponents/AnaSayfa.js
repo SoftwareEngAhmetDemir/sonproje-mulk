@@ -114,7 +114,12 @@ function AnaSayfa() {
           if (e === s.city) {
             let ind = colors.find((e) => e.Ticari === s.title);
             console.log(ind);
-            nat.push({ title: s.value, value: s.value, color: ind.color,turu:s.title });
+            nat.push({
+              title: s.value,
+              value: s.value,
+              color: ind.color,
+              turu: s.title,
+            });
             uv++;
           }
         });
@@ -287,75 +292,83 @@ function AnaSayfa() {
       {/* <img className='myimg' src='http://www.theage.com.au/ffximage/2007/09/12/mario300_narrowweb__300x392,0.jpg' 
 width='200' height='150' style={{position:'absolute',bottom:'30px',
 left:'10px',zIndex:'2',border:'0 none',borderRadius:'50%',objectFit:'contain',opacity:'1'}}/> */}
-<div style={{width:'70%',margin:'auto'}} class='d-xs-none d-md-block'>
-      <table width='60%' style={{margin:'auto'}}>
-        <tr width='70%'>
-          <tbody>
-            {chart_show.map((e, index) => {
-              return (
-                <td key={index}>
-                  <PieChart
-                    style={{
-                      width: "200px",
-                      position: "relative",
-                      zIndex: "1",
-                      left: "10px",
-                    }}
-                    onClick={(e, segmentIndex) => Ftr(e, segmentIndex, index)}
-                    data={e}
-                  />
-                  <br />
-                  <div style={{ marginLeft: "95px" }}>{show_cities[index]}</div>
-                </td>
-              );
-            })}
-          </tbody>
-        </tr>
-      </table>
+      <div
+        style={{ width: "70%", margin: "auto" }}
+        class="d-xs-none d-md-block"
+      >
+        <table width="60%" style={{ margin: "auto" }}>
+          <tr width="70%">
+            <tbody>
+              {chart_show.map((e, index) => {
+                return (
+                  <td key={index}>
+                    <PieChart
+                      style={{
+                        width: "200px",
+                        position: "relative",
+                        zIndex: "1",
+                        left: "10px",
+                      }}
+                      onClick={(e, segmentIndex) => Ftr(e, segmentIndex, index)}
+                      data={e}
+                    />
+                    <br />
+                    <div style={{ marginLeft: "95px" }}>
+                      {show_cities[index]}
+                    </div>
+                  </td>
+                );
+              })}
+            </tbody>
+          </tr>
+        </table>
       </div>
       <br />
-      <div className='d-xs-none d-md-block'>
-      <div className="row " style={{ margin:'auto' ,top:'500px',marginLeft:'100px'}} >
-        <div 
-          style={{
-            backgroundColor: colors[0].color,
-            height: "20px",
-            width: "20px",
-           marginLeft: "95px"
-          }}
-        ></div>{" "}
-        <span style={{ fontSize: "20px" }}>Arsa</span>
+      <div className="d-xs-none d-md-block">
         <div
-          style={{
-            backgroundColor: colors[1].color,
-            height: "20px",
-            width: "20px",
-            marginLeft: "95px",
-          }}
-        ></div>{" "}
-        <span style={{ fontSize: "20px" }}>Tarla</span>
-        <div
-          style={{
-            backgroundColor: colors[2].color,
-            height: "20px",
-            width: "20px",
-            marginLeft: "95px"
-          }}
-        ></div>{" "}
-        <span style={{ fontSize: "20px" }}>Ticari</span>
-        <div
-          style={{
-            backgroundColor: colors[3].color,
-            height: "20px",
-            width: "20px",
-            marginLeft: "95px"
-          }}
-        ></div>{" "}
-        <span style={{ fontSize: "20px" }}>Konut</span>
-      </div>
+          className="row "
+          style={{ margin: "auto", top: "500px", marginLeft: "100px" }}
+        >
+          <div
+            style={{
+              backgroundColor: colors[0].color,
+              height: "20px",
+              width: "20px",
+              marginLeft: "95px",
+            }}
+          ></div>{" "}
+          <span style={{ fontSize: "20px" }}>Arsa</span>
+          <div
+            style={{
+              backgroundColor: colors[1].color,
+              height: "20px",
+              width: "20px",
+              marginLeft: "95px",
+            }}
+          ></div>{" "}
+          <span style={{ fontSize: "20px" }}>Tarla</span>
+          <div
+            style={{
+              backgroundColor: colors[2].color,
+              height: "20px",
+              width: "20px",
+              marginLeft: "95px",
+            }}
+          ></div>{" "}
+          <span style={{ fontSize: "20px" }}>Ticari</span>
+          <div
+            style={{
+              backgroundColor: colors[3].color,
+              height: "20px",
+              width: "20px",
+              marginLeft: "95px",
+            }}
+          ></div>{" "}
+          <span style={{ fontSize: "20px" }}>Konut</span>
+        </div>
 
-{/* ////////////////// */}
-{/* <div style={{width:'70%',margin:'auto'}} class='d-sm-block d-xs-block d-md-none'>
+        {/* ////////////////// */}
+        {/* <div style={{width:'70%',margin:'auto'}} class='d-sm-block d-xs-block d-md-none'>
       <table width='60%' style={{margin:'auto'}}>
         <tr width='70%'>
           <tbody>
@@ -422,7 +435,7 @@ left:'10px',zIndex:'2',border:'0 none',borderRadius:'50%',objectFit:'contain',op
         <span style={{ fontSize: "20px" }}>Konut</span>
       </div>
       </div> */}
-{/* ////////////////////////// */}
+        {/* ////////////////////////// */}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import { AuthContext } from "../panel/Context/AuthContext";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-const ENDPOINT = "http://softwareengahmetdemir.github.io/mysocket";
+const ENDPOINT = "http://localhost:8000";
 
 export default React.memo(function CardDetails() {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(
